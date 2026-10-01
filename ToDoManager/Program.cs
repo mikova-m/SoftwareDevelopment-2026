@@ -19,6 +19,7 @@ namespace ToDoManager
                 Console.WriteLine("=== Изберете опция: ===");
                 Console.ForegroundColor = ConsoleColor.White;
 
+
                 Console.WriteLine("1. Добави нова задача");
                 Console.WriteLine("2. Виж всички въведени задачи");
                 Console.WriteLine("3. Маркирай задача като изпълнена");
