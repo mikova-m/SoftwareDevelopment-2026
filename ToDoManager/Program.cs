@@ -10,6 +10,7 @@ namespace ToDoManager
     internal class Program
     {
         static List<Task> tasks = new List<Task>();
+        private static int nextId = 1;
 
         static void Main(string[] args)
         {
@@ -71,7 +72,7 @@ namespace ToDoManager
             //Specific
             while (true)
             {
-                Console.Write("Краен срок (дд.ММ.гггг): ");
+                Console.Write("Краен срок (DD.ММ.YYYY): ");
 
                 if (DateTime.TryParse(Console.ReadLine(), out deadline))
                     break;
@@ -79,8 +80,9 @@ namespace ToDoManager
                 Console.WriteLine("Невалидна дата. Опитайте отново.");
             }
 
-            Task newTask = new Task(title, description, deadline);
+            Task newTask = new Task(nextId,title, description, deadline);
             tasks.Add(newTask);
+            nextId++;
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nЗадачата беше добавена успешно!");
@@ -104,7 +106,7 @@ namespace ToDoManager
                 for (int i = 0; i < tasks.Count; i++) 
                 {
 
-                    Console.WriteLine($"Задача номер: {i+1}");
+                    Console.WriteLine($"Задача номер: {tasks[i].Id}");
                     Console.WriteLine($"Заглавие: {tasks[i].Title}");
                     Console.WriteLine($"Описание: {tasks[i].Description}");
                     Console.WriteLine($"Краен срок: {tasks[i].DeadLine: dd.MM.YYYY}");
@@ -154,7 +156,7 @@ namespace ToDoManager
                 }
                 else
                 {
-                    Console.WriteLine("Въведете номер на набична задача");
+                    Console.WriteLine("Въведете номер на налична задача");
                 }
             }              
         }
