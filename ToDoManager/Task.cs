@@ -16,9 +16,18 @@ namespace ToDoManager
 
         public Task(int id, string title, string description, DateTime deadLine)
         {
+            if (id <= 0)
+            {
+                throw new ArgumentOutOfRangeException("Id трябва да е положително!");
+            }
+           
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Заглавието е задължително!");
+            }//свързано с try catch
             Id = id;
             Title = title;
-            Description = description;
+            Description = description;// ako napravim if za opisanie se svurzva sus sushtiq try catch!
             DeadLine = deadLine;
             IsCompleted = false;
         } 

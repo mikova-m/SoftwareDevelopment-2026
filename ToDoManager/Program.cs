@@ -66,6 +66,7 @@ namespace ToDoManager
             string title = Console.ReadLine();
             Console.Write("Описание: ");
             string description = Console.ReadLine();
+
            
             DateTime deadline;
 
@@ -79,15 +80,21 @@ namespace ToDoManager
 
                 Console.WriteLine("Невалидна дата. Опитайте отново.");
             }
+            try
+            {
+                Task newTask = new Task(nextId, title, description, deadline);
+                tasks.Add(newTask);
+                nextId++;
 
-            Task newTask = new Task(nextId,title, description, deadline);
-            tasks.Add(newTask);
-            nextId++;
-
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\nЗадачата беше добавена успешно!");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\nЗадачата беше добавена успешно!");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("Грешка! Трябва да има заглавие!");
+            }
         }
 
         static void ShowTasks()
@@ -147,17 +154,37 @@ namespace ToDoManager
             else
             {
                 Console.WriteLine("Въведете номера на задачата, която искате да изтриете: ");
-                int number = int.Parse (Console.ReadLine());
+                int id = int.Parse (Console.ReadLine());
+                Task deleteTask = null;
 
-                if (number > 0 && number <= tasks.Count)
+                foreach (Task task in tasks)
                 {
-                    tasks.RemoveAt(number - 1);
-                    Console.WriteLine("Задачата е изтрита");
+                    if (task.Id == id)
+                    {
+                        deleteTask = task;
+                        break;
+                    }
+                }
+
+                if(deleteTask != null)
+                {
+                    tasks.Remove(deleteTask);
+                    Console.WriteLine("Задачата е изтрита!");
                 }
                 else
                 {
-                    Console.WriteLine("Въведете номер на налична задача");
+                    Console.WriteLine("Няма задача с такова ID");
                 }
+                
+                //if (number > 0 && number <= tasks.Count)
+                //{
+                //    tasks.RemoveAt(number - 1);
+                //    Console.WriteLine("Задачата е изтрита");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Въведете номер на налична задача");
+                //}
             }              
         }
 
