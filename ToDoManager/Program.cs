@@ -110,7 +110,7 @@ namespace ToDoManager
             }
             else
             {
-                for (int i = 0; i < tasks.Count; i++) 
+                for (int i = 0; i < tasks.Count; i++) //обхождаме всички в  списъка
                 {
 
                     Console.WriteLine($"Задача номер: {tasks[i].Id}");
@@ -128,11 +128,13 @@ namespace ToDoManager
             ShowTasks();
 
             Console.Write("\nВъведете номер на задачата, която да бъде маркикана като изпълнена: ");
-            int number = int.Parse(Console.ReadLine());
+            int id = int.Parse(Console.ReadLine());
 
-            if (number >= 1 && number <= tasks.Count)
+            var task = tasks.FirstOrDefault(t => t.Id == id);//Променено, синтаксис
+
+            if (task != null)
             {
-                tasks[number - 1].IsCompleted = true;
+                task.IsCompleted = true;//не целия списък а конкретният таск
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Задачата е маркирана като изпълнена!");
                 Console.WriteLine();
@@ -175,16 +177,6 @@ namespace ToDoManager
                 {
                     Console.WriteLine("Няма задача с такова ID");
                 }
-                
-                //if (number > 0 && number <= tasks.Count)
-                //{
-                //    tasks.RemoveAt(number - 1);
-                //    Console.WriteLine("Задачата е изтрита");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("Въведете номер на налична задача");
-                //}
             }              
         }
 
