@@ -9,9 +9,6 @@ namespace ToDoManager
 {
     internal class Program
     {
-        static List<Task> tasks = new List<Task>();
-        private static int nextId = 1;
-
         static void Main(string[] args)
         {
             while (true)
@@ -82,9 +79,7 @@ namespace ToDoManager
             }
             try
             {
-                Task newTask = new Task(nextId, title, description, deadline);
-                tasks.Add(newTask);
-                nextId++;
+                //
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nЗадачата беше добавена успешно!");
@@ -130,23 +125,23 @@ namespace ToDoManager
             Console.Write("\nВъведете номер на задачата, която да бъде маркикана като изпълнена: ");
             int id = int.Parse(Console.ReadLine());
 
-            var task = tasks.FirstOrDefault(t => t.Id == id);//Променено, синтаксис
+            //var task = tasks.FirstOrDefault(t => t.Id == id);//Променено, синтаксис
 
-            if (task != null)
-            {
-                task.IsCompleted = true;//не целия списък а конкретният таск
+            //if (task != null)
+            //{
+            //    task.IsCompleted = true;//не целия списък а конкретният таск
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Задачата е маркирана като изпълнена!");
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.White;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Невалиден номер!");
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.White;
-            }
+            //}
+            //else
+            //{
+            //    Console.ForegroundColor = ConsoleColor.Red;
+            //    Console.WriteLine("Невалиден номер!");
+            //    Console.WriteLine();
+            //    Console.ForegroundColor = ConsoleColor.White;
+            //}
 
         }
 

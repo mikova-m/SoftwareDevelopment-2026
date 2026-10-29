@@ -8,11 +8,23 @@ namespace ToDoManager
 {
     internal class Task
     {
+        private bool isCompleted;
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DeadLine { get; set; }
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted
+        {
+            get
+            {
+                return isCompleted;
+            }
+            private set
+            {
+                isCompleted = value;
+            }
+        }
 
         public Task(int id, string title, string description, DateTime deadLine)
         {
